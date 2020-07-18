@@ -31,10 +31,10 @@ public class EmployeeWageBuilder {
 	        	break;
 	        }
 	        totalEmpHr=totalEmpHr+employeeHours;
-	        System.out.println("asd "+employeeHours);
+	        System.out.println("Day "+totalWorkingDays+" wage: "+(employeeHours*employeeRatePerHr));
 	     }
 	     totalSalary=totalEmpHr*employeeRatePerHr;
-	     System.out.println("Salary of Employee is "+totalSalary);
+	     System.out.println("Total Salary of Employee is "+totalSalary);
 
 	}
 
