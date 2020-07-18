@@ -3,7 +3,7 @@ public class EmployeeWageBuilder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to UC1-Employee Check");
+		System.out.println("Welcome to UC3-Add part time employee");
 		 int IS_FULL_TIME = 1;
 		 int IS_PART_TIME = 2;
 		 float employeeHours = 0;
