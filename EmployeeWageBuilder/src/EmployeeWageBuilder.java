@@ -1,25 +1,29 @@
+import java.util.*;
 
 public class EmployeeWageBuilder {
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
 	
-	private int numOfCompany = 0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	private LinkedList<CompanyEmpWage> CompanyEmpWageList;
+	private Map<String,CompanyEmpWage> CompanyToEmpWageMap;
 	
 	 EmployeeWageBuilder(){
-		 companyEmpWageArray = new CompanyEmpWage[5];
+		 CompanyEmpWageList = new LinkedList<>();
+		 CompanyToEmpWageMap = new HashMap<>();
 	 }
 	 
 	private void addCompangEmpWage(String companyName,int employeeRatePerHr,int numOfWorkingDays ,int maxHoursPerMonth) {
 		
-		companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName,employeeRatePerHr,numOfWorkingDays,maxHoursPerMonth);
-		numOfCompany++;
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName,employeeRatePerHr,numOfWorkingDays,maxHoursPerMonth);
+		CompanyEmpWageList.add(companyEmpWage);
+		CompanyToEmpWageMap.put(companyName, companyEmpWage);
 	}
 	
 	private void computeEmpWage() {
-		for (int i=0 ;i< numOfCompany;i++) {
-			companyEmpWageArray[i].setTotalEmpWage( this.computeEmpWage(companyEmpWageArray[i]) );
-			System.out.println(companyEmpWageArray[i]);
+		for (int i=0 ;i< CompanyEmpWageList.size();i++) {
+			CompanyEmpWage companyEmpWage = CompanyEmpWageList.get(i);
+			companyEmpWage.setTotalEmpWage( this.computeEmpWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 			
 		}
 		
@@ -61,7 +65,7 @@ public class EmployeeWageBuilder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to UC10-Manage_Emp_Wage_of_multiCompanies");	 
+		System.out.println("Welcome to UC11-Refactor_to_use_list");	 
 		 EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
 		 employeeWageBuilder.addCompangEmpWage("TCS", 23, 4, 12);
 		 employeeWageBuilder.addCompangEmpWage("Wipro", 15, 4, 20);
