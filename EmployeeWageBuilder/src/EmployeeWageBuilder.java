@@ -63,17 +63,24 @@ public class EmployeeWageBuilder {
 		 wage[1] = Integer.toString(totalEmpHr * companyEmpWage.employeeRatePerHr);
 		 return wage ;
 			
-		    
+	 }
+	 
+	 public int getTotalWage(String company) {
+		 return CompanyToEmpWageMap.get(company).totalEmpWage;
+		 
+		 
 	 }
 	 
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to UC11-Refactor_to_use_list");	 
+		System.out.println("Welcome to UC13-Get_totalWage_by_company");	 
 		 EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
 		 employeeWageBuilder.addCompangEmpWage("TCS", 23, 4, 12);
 		 employeeWageBuilder.addCompangEmpWage("Wipro", 15, 4, 20);
 		 employeeWageBuilder.computeEmpWage();
+		 System.out.println("Total wage for TCS is "+employeeWageBuilder.getTotalWage("TCS"));
+		 System.out.println("Total wage for Wipro is "+employeeWageBuilder.getTotalWage("Wipro"));
 		
 
 	}
