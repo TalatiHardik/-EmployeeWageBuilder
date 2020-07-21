@@ -70,7 +70,7 @@ public class EmployeeWageBuilder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to UC7-Use_OOP_Concepts");	 
+		System.out.println("Welcome to UC8-Use_class_isntances");	 
 		 EmployeeWageBuilder emp1 = new EmployeeWageBuilder("TCS",20,10,10);
 		 emp1.getSalary();
 		 EmployeeWageBuilder emp2 = new EmployeeWageBuilder("Wipro",22,9,12);
