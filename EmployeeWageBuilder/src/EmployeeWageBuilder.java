@@ -22,7 +22,8 @@ public class EmployeeWageBuilder {
 	private void computeEmpWage() {
 		for (int i=0 ;i< CompanyEmpWageList.size();i++) {
 			CompanyEmpWage companyEmpWage = CompanyEmpWageList.get(i);
-			companyEmpWage.setTotalEmpWage( this.computeEmpWage(companyEmpWage));
+			String[] wage = this.computeEmpWage(companyEmpWage);
+			companyEmpWage.setTotalEmpWage( wage[0] , wage[1] );
 			System.out.println(companyEmpWage);
 			
 		}
@@ -30,11 +31,11 @@ public class EmployeeWageBuilder {
 	}
 	 
 	 
-	 private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	 private String[] computeEmpWage(CompanyEmpWage companyEmpWage) {
 		 
 		 int totalWorkingDays=0 , totalEmpHr=0  ,employeeHours=0;
+		 String dailywage="",tempwage="";
 		 System.out.println("Company: "+companyEmpWage.companyName);
-		 System.out.println("Daily wages are: ");
 		 while(totalEmpHr < companyEmpWage.maxHoursPerMonth &&  totalWorkingDays < companyEmpWage.numOfWorkingDays) {
 		    	
 		    	double empCheck = Math.floor(Math.random()*10) % 3;
@@ -53,12 +54,15 @@ public class EmployeeWageBuilder {
 		        	break;
 		        }
 		        totalEmpHr=totalEmpHr+employeeHours;
-		        System.out.println("Day "+totalWorkingDays+" \t wage: "+(employeeHours*companyEmpWage.employeeRatePerHr));
+		        tempwage="Day "+totalWorkingDays+" \t wage: "+(employeeHours*companyEmpWage.employeeRatePerHr);
+		        dailywage=dailywage+"\n"+tempwage;
+		       // System.out.println(tempwage);
 		     }
-		 
-		 		//companyEmpWage.totalEmpWage=totalEmpHr * companyEmpWage.employeeRatePerHr;
-		     //System.out.println("Total Salary of "+companyName+" employee is "+totalEmpWage);
-			return  totalEmpHr * companyEmpWage.employeeRatePerHr;
+		 String [] wage = new String[2];
+		 wage[0] = dailywage;
+		 wage[1] = Integer.toString(totalEmpHr * companyEmpWage.employeeRatePerHr);
+		 return wage ;
+			
 		    
 	 }
 	 
