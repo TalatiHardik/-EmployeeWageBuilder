@@ -41,9 +41,8 @@ public class EmployeeWageBuilder {
 	 
 	 public void getSalary() {
 		 
-		 if(companyName!="") {
-			 System.out.println("Employee is from "+companyName);
-		 }
+	
+		 System.out.println("Company: "+companyName);
 		 System.out.println("Daily wages are: ");
 		 while(totalEmpHr < maxHrs &&  totalWorkingDays < numOfDays) {
 		    	
@@ -55,28 +54,24 @@ public class EmployeeWageBuilder {
 		     }
 		 
 		     totalSalary=totalEmpHr*employeeRatePerHr;
-		     
-		     if(companyName!="") {
-		    	 
-		    	 System.out.println("Total Salary of "+companyName+" employee is "+totalSalary);
-			 }
-		     else{
-		    	 
-		    	 System.out.println("Total Salary of Employee is "+totalSalary);
-		     }
+		     //System.out.println("Total Salary of "+companyName+" employee is "+totalSalary);
+			 
+		    
 	 }
 	 
-    
+    public String toString() {
+    	return "Total Salary of "+companyName+" employee is "+totalSalary;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to UC7-Use_OOP_Concepts");	 
-		 EmployeeWageBuilder emp1 = new EmployeeWageBuilder("TCS",20,10,10);
-		 emp1.getSalary();
-		 EmployeeWageBuilder emp2 = new EmployeeWageBuilder("Wipro",22,9,12);
-		 emp2.getSalary();
-		 
-	     
+		System.out.println("Welcome to UC9-To_save_total_wage");	 
+		 EmployeeWageBuilder TCS = new EmployeeWageBuilder("TCS",20,10,10);
+		 TCS.getSalary();
+		 EmployeeWageBuilder Wipro = new EmployeeWageBuilder("Wipro",22,9,12);
+		 Wipro.getSalary();
+		 System.out.println(TCS);
+	     System.out.println(Wipro); 
 
 	}
 
