@@ -1,77 +1,72 @@
 
 public class EmployeeWageBuilder {
-	final int IS_FULL_TIME = 1;
-	 final int IS_PART_TIME = 2;
-	 
-	 float employeeHours = 0 , employeeRatePerHr=20;
-	 float totalSalary=0;
-	 float totalWorkingDays=0 , totalEmpHr=0 ;
-	 int numOfDays=0 , maxHrs=0;
-	 String companyName=""; 
-	 
-	 EmployeeWageBuilder(String name , float employeeRatePerHr , int numOfDays , int maxHrs){
-		 companyName=name;
-		 this.employeeRatePerHr=employeeRatePerHr;
-		 this.numOfDays=numOfDays;
-		 this.maxHrs=maxHrs;
-	 }
-	 
-	 EmployeeWageBuilder(){
-		 companyName="";
-		 
-	 }
-	 
-	 public float getWorkingHours(double empCheck){
-		 switch((int)empCheck) {
-	        case IS_FULL_TIME:
-	        	employeeHours = 8;
-	        	break;
-	        
-	        case IS_PART_TIME:
-	        	employeeHours = 4;
-	        	break;
-	        	
-	        default:
-	        	employeeHours = 0;
-	        	break;
-	        }
-		 
-		 return employeeHours;
-	 }
-	 
-	 public void getSalary() {
-		 
+	public static final int IS_FULL_TIME = 1;
+	public static final int IS_PART_TIME = 2;
 	
-		 System.out.println("Company: "+companyName);
+	private int numOfCompany = 0;
+	private CompanyEmpWage[] companyEmpWageArray;
+	
+	 EmployeeWageBuilder(){
+		 companyEmpWageArray = new CompanyEmpWage[5];
+	 }
+	 
+	private void addCompangEmpWage(String companyName,int employeeRatePerHr,int numOfWorkingDays ,int maxHoursPerMonth) {
+		
+		companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName,employeeRatePerHr,numOfWorkingDays,maxHoursPerMonth);
+		numOfCompany++;
+	}
+	
+	private void computeEmpWage() {
+		for (int i=0 ;i< numOfCompany;i++) {
+			companyEmpWageArray[i].setTotalEmpWage( this.computeEmpWage(companyEmpWageArray[i]) );
+			System.out.println(companyEmpWageArray[i]);
+			
+		}
+		
+	}
+	 
+	 
+	 private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+		 
+		 int totalWorkingDays=0 , totalEmpHr=0  ,employeeHours=0;
+		 System.out.println("Company: "+companyEmpWage.companyName);
 		 System.out.println("Daily wages are: ");
-		 while(totalEmpHr < maxHrs &&  totalWorkingDays < numOfDays) {
+		 while(totalEmpHr < companyEmpWage.maxHoursPerMonth &&  totalWorkingDays < companyEmpWage.numOfWorkingDays) {
 		    	
 		    	double empCheck = Math.floor(Math.random()*10) % 3;
 		    	totalWorkingDays++;
-		    	employeeHours=getWorkingHours(empCheck);
+		    	switch((int)empCheck) {
+		        case IS_FULL_TIME:
+		        	employeeHours = 8;
+		        	break;
+		        
+		        case IS_PART_TIME:
+		        	employeeHours = 4;
+		        	break;
+		        	
+		        default:
+		        	employeeHours = 0;
+		        	break;
+		        }
 		        totalEmpHr=totalEmpHr+employeeHours;
-		        System.out.println("Day "+totalWorkingDays+" \t wage: "+(employeeHours*employeeRatePerHr));
+		        System.out.println("Day "+totalWorkingDays+" \t wage: "+(employeeHours*companyEmpWage.employeeRatePerHr));
 		     }
 		 
-		     totalSalary=totalEmpHr*employeeRatePerHr;
-		     //System.out.println("Total Salary of "+companyName+" employee is "+totalSalary);
-			 
+		 		//companyEmpWage.totalEmpWage=totalEmpHr * companyEmpWage.employeeRatePerHr;
+		     //System.out.println("Total Salary of "+companyName+" employee is "+totalEmpWage);
+			return  totalEmpHr * companyEmpWage.employeeRatePerHr;
 		    
 	 }
 	 
-    public String toString() {
-    	return "Total Salary of "+companyName+" employee is "+totalSalary;
-    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to UC9-To_save_total_wage");	 
-		 EmployeeWageBuilder TCS = new EmployeeWageBuilder("TCS",20,10,10);
-		 TCS.getSalary();
-		 EmployeeWageBuilder Wipro = new EmployeeWageBuilder("Wipro",22,9,12);
-		 Wipro.getSalary();
-		 System.out.println(TCS);
-	     System.out.println(Wipro); 
+		System.out.println("Welcome to UC10-Manage_Emp_Wage_of_multiCompanies");	 
+		 EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
+		 employeeWageBuilder.addCompangEmpWage("TCS", 23, 4, 12);
+		 employeeWageBuilder.addCompangEmpWage("Wipro", 15, 4, 20);
+		 employeeWageBuilder.computeEmpWage();
+		
 
 	}
 
